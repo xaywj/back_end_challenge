@@ -11,7 +11,7 @@ export class User {
   @Column()
   lastName: string;
 
-  @Column()
+  @Column({ unique: true})
   username: string;
 
   @Column()
@@ -30,5 +30,5 @@ export class User {
     type: 'datetime',
     default: () => 'CURRENT_TIMESTAMP',
   })
-  updated_at: Date;
+  updated_at: Date; 
 }
