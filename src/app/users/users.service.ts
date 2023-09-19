@@ -43,6 +43,11 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    return await this.usersRepository.delete(id);
+    const user= await this.usersRepository.findOneBy({ 'id': id });
+    if(!user)
+    throw new NotFoundException(`User with id ${id} not found`)
+    
+     await this.usersRepository.delete(id);
+     return { message: 'User updated successfully' };
   }
 }
