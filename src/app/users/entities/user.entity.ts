@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Delete } from '@nestjs/common';
+import { Role } from 'src/app/role/entities/role.entity'; 
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -31,4 +33,8 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updated_at: Date; 
+
+  @ManyToOne(() => Role, (role) => role.user, { cascade: true })
+  @JoinColumn({ name: 'role_id', referencedColumnName: 'id'})
+  role: Role;
 }
